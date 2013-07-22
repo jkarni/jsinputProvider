@@ -39,9 +39,11 @@ var _callAny = function(fnName) {
 
 
 
-var rpc = new easyXDM.Rpc({}, {
-
-    local: {
-        accessPoint: _callAny
+var socket = new easyXDM.Socket({}, {
+    onMessage:function(message, origin) {
+        if (origin !== parent.document.domain) {
+        
+        }
     }
+
 });
