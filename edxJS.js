@@ -24,8 +24,8 @@ var _deepKey = function(obj, path){
 };
 
 
-//     Call function `fnName` with optional arguments, and return its return
-//   value. `fnName` should be specified in method form; that is, as 
+//     Get function `fnName` . `fnName` should be specified in method form;
+//     that is, as 
 //
 //          something.somethingelse.somefn
 //
@@ -33,20 +33,20 @@ var _deepKey = function(obj, path){
 //
 //          something.somethingelse["somefn"]
 var _callAny = function(fnName) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    return _deepKey("window", fnName).apply(this, args);
+    return _deepKey(window, fnName);
 };
 
-
-
-var socket = new easyXDM.Socket({}, {
-    onMessage:function(message, origin) {
-        if (origin !== parent.document.domain) {
+var rpc = new easyXDM.Rpc({}, {
+    local: {
+        callAny: function(fnName) {
+            var args = Array.prototype.slice.call(arguments, 1, -2);
+            var ans = _callAny(fnName);
+            rpc.returnVal(ans.apply(this, args));
             return;
         }
-        else {
-            return _callAny(message);
-        }
+    },
+    remote: {
+        returnVal:{}
     }
-
 });
+

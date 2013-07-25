@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>easyXDM</title>
+        <script type="text/javascript"
+            src="http://jkarni.github.io/jsinputProvider/easyXDM.min.js"> </script>
+
+    </head>
+    <body>
+        <script type="text/javascript"
+            src="http://jkarni.github.io/jsinputProvider/edxJS.js"> </script>
+        <script type="text/javascript">
+
+// These functions should be callable from an edX domain.
+var myTestFn = function () {
+    console.debug("myTestFn called.");
+    return "Hey hey!";
+};
+
+var myTestFn2 = function (name) {
+    console.debug("myTestFn2 called.");
+    return "Hey " + name;
+};
+
+var cont = {
+    myTestFn3 : function (s1, s2) {
+        console.debug("myTestFn3 called.");
+        return "Hey " + s1 + s2;
+    }
+}
+
+<!--console.log(socket);-->
+        </script>
+        <div id="log" style="height:100px;border:1px dotted black;overflow:auto">
+        </div>
+    </body>
+</html>
